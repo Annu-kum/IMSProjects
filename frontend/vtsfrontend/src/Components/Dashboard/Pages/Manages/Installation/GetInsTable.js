@@ -80,7 +80,7 @@ export default function DataGridDemo() {
       setLoading(true);
       try {
         // Fetch your data here
-        const response = await axios.get(`http://127.0.0.1:8000/installation/getinstallerdetai/`,{headers});
+        const response = await axios.get(`https://ims.digitaaz.com/installation/getinstallerdetai/`,{headers});
         setRows(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -96,7 +96,7 @@ export default function DataGridDemo() {
 
   const refresh = ()=>{
    
-      axios.get(`http://127.0.0.1:8000/installation/getinstallerdetai/`,{headers})
+      axios.get(`https://ims.digitaaz.com/installation/getinstallerdetai/`,{headers})
         .then((res) => {
           setRows(res.data);
         })
@@ -175,7 +175,7 @@ const deletePopups = id =>{
 
     try {
       const response = await axios.patch(
-        `http://127.0.0.1:8000/installation/updateinstaller/${newRow.id}/`,
+        `https://ims.digitaaz.com/installation/updateinstaller/${newRow.id}/`,
         formData,
         {
           headers: {
@@ -207,7 +207,7 @@ const deletePopups = id =>{
     try {
       const response = await axios({
         method: 'get',
-        url: `http://127.0.0.1:8000/installation/get_file_url/${id}/`,
+        url: `https://ims.digitaaz.com/installation/get_file_url/${id}/`,
         responseType: 'arraybuffer',
       });
 
