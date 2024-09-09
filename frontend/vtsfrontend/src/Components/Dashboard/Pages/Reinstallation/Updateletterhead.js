@@ -4,7 +4,7 @@ import axios from 'axios';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const baseUrl = 'http://127.0.0.1:8000';
+const baseUrl = 'https://ims.digitaaz.com';
 
 const getFileNameFromUrl = (url) => {
   return url.split('/').pop();
