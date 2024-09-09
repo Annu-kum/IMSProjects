@@ -5,7 +5,7 @@ import axios from 'axios';
 import {Box} from '@mui/material';
 import { Button } from '@mui/material';
 
-const baseUrl = 'http://127.0.0.1:8000';
+const baseUrl = 'https://ims.digitaaz.com';
 const ITEM_HEIGHT = 48;
 
 export default function OtrDialog() {
