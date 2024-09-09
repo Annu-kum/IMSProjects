@@ -115,7 +115,7 @@ const InputTable = () => {
 
   const fetchInstallations = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/installation/getinstaller/${millerId}/`, { headers });
+      const response = await axios.get(`https://ims.digitaaz.com/installation/getinstaller/${millerId}/`, { headers });
       setInstallations(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       toast.error('check Miller or Transpoter Id');
@@ -163,7 +163,7 @@ const InputTable = () => {
            
             formData.append('MILLER_TRANSPORTER_ID', millerId);
             formData.append('Deactivation_letterHead', file);
-          axios.post(`http://127.0.0.1:8000/deactivation/postdeactivate/`,formData,{
+          axios.post(`https://ims.digitaaz.com/deactivation/postdeactivate/`,formData,{
           headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': `Token ${token}`
