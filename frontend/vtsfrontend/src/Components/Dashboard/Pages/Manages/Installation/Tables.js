@@ -27,7 +27,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { formatDate } from 'date-fns';
 
 
-const baseUrl='http://127.0.0.1:8000'
+const baseUrl='https://ims.digitaaz.com'
 export default function InputTable() {
   const [hide,setHide]=useState(true)
   
