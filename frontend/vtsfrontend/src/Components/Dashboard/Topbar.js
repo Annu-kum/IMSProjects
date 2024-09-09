@@ -11,7 +11,7 @@ import ChangePassword from '../account/ChangePassword';
 import axios from 'axios';
 
 
-const baseUrl='http://127.0.0.1:8000'
+const baseUrl='https://ims.digitaaz.com'
 
 const Topbar = ({ handleDrawerToggle }) => {
   const [auth, setAuth] = useState(true);
