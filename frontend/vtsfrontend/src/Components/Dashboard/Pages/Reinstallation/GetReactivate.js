@@ -115,7 +115,7 @@ const InputTable = () => {
 
   const fetchInstallations = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/deactivation/getdeactivate/${millerId}/`, { headers });
+      const response = await axios.get(`https://ims.digitaaz.com/deactivation/getdeactivate/${millerId}/`, { headers });
       setInstallations(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error('Error fetching installations:', error);
@@ -157,7 +157,7 @@ const InputTable = () => {
            
             formData.append('MILLER_TRANSPORTER_ID', millerId);
             formData.append('Reactivation_letterHead', file);
-          axios.post(`http://127.0.0.1:8000/reactivation/postReactivate/`,formData,{
+          axios.post(`https://ims.digitaaz.com/reactivation/postReactivate/`,formData,{
           headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': `Token ${token}`
