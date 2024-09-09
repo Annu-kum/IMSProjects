@@ -81,7 +81,7 @@ export default function DataGridDemo() {
       setLoading(true);
       try {
         // Fetch your data here
-        const response = await axios.get(`http://127.0.0.1:8000/reactivation/getReactivatedetai/`,{headers});
+        const response = await axios.get(`https://ims.digitaaz.com/reactivation/getReactivatedetai/`,{headers});
         setRows(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -96,7 +96,7 @@ export default function DataGridDemo() {
  
   const refresh = ()=>{
    
-    axios.get(`http://127.0.0.1:8000/reactivation/getReactivatedetai/`,{headers})
+    axios.get(`https://ims.digitaaz.com/reactivation/getReactivatedetai/`,{headers})
       .then((res) => {
         setRows(res.data);
       })
@@ -173,7 +173,7 @@ const dialogbox=()=>{
 
     try {
       const response = await axios.patch(
-        `http://127.0.0.1:8000/reactivation/updateReactivate/${newRow.id}/`,
+        `https://ims.digitaaz.com/reactivation/updateReactivate/${newRow.id}/`,
         formData,
         {
           headers: {
@@ -203,7 +203,7 @@ const dialogbox=()=>{
     try {
       const response = await axios({
         method: 'get',
-        url: `http://127.0.0.1:8000/reactivation/get_file_url/${id}/`,
+        url: `https://ims.digitaaz.com/reactivation/get_file_url/${id}/`,
         responseType: 'arraybuffer',
       });
 
