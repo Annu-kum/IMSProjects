@@ -76,7 +76,7 @@ export default function DataGridDemo() {
       setLoading(true);
       try {
         // Fetch your data here
-        const response = await axios.get(`https://ims.digitaaz.com/deactivation/getdeactivatedetai/`,{headers});
+        const response = await axios.get(`https://imsapi.digitaaz.com/deactivation/getdeactivatedetai/`,{headers});
         setRows(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -91,7 +91,7 @@ export default function DataGridDemo() {
 
   const refresh = ()=>{
    
-    axios.get(`https://ims.digitaaz.com/deactivation/getdeactivatedetai/`,{headers})
+    axios.get(`https://imsapi.digitaaz.com/deactivation/getdeactivatedetai/`,{headers})
       .then((res) => {
         setRows(res.data);
       })
@@ -170,7 +170,7 @@ const dialogbox=()=>{
 
     try {
       const response = await axios.patch(
-        `https://ims.digitaaz.com/deactivation/updatedeactivate/${newRow.id}/`,
+        `https://imsapi.digitaaz.com/deactivation/updatedeactivate/${newRow.id}/`,
         formData,
         {
           headers: {
@@ -200,7 +200,7 @@ const dialogbox=()=>{
     try {
       const response = await axios({
         method: 'get',
-        url: `https://ims.digitaaz.com/deactivation/get_file_url/${id}/`,
+        url: `https://imsapi.digitaaz.com/deactivation/get_file_url/${id}/`,
         responseType: 'arraybuffer',
       });
 
