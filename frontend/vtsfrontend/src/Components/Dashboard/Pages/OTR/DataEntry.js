@@ -14,7 +14,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 
 
 
-const baseUrl='https://ims.digitaaz.com'
+const baseUrl='https://imsapi.digitaaz.com'
 
 
 
