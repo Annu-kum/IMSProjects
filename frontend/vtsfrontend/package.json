@@ -1,6 +1,6 @@
 {
   "name": "vtsfrontend",
-  "proxy": "https://ims.digitaaz.com",
+  "proxy": "https://imsapi.digitaaz.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
