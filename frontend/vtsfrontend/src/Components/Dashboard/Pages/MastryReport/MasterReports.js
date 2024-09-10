@@ -20,7 +20,7 @@ import jspdf from 'jspdf';
 import Header from '../../Header';
 import { toast } from 'react-toastify';
 
-const baseUrl = 'https://ims.digitaaz.com';
+const baseUrl = 'https://imsapi.digitaaz.com';
 
 export default function MasterReports() {
   const [data, setData] = React.useState([]);
