@@ -22,7 +22,7 @@ import {FormControl} from '@mui/material';
 import { toast } from 'react-toastify';
 // Define a default theme
 
-const baseUrl='https://ims.digitaaz.com'
+const baseUrl='https://imsapi.digitaaz.com/'
 const defaultTheme = createTheme();
 
 export default function LoginApp() {
