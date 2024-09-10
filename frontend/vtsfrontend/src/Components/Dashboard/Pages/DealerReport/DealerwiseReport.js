@@ -11,7 +11,7 @@ import {TableCell,TableRow,MenuItem,Menu,Table,TableHead,TableBody} from '@mui/m
 import 'jspdf-autotable';
 import { CSVLink } from 'react-csv';
 
-const baseUrl='https://ims.digitaaz.com'
+const baseUrl='https://imsapi.digitaaz.com'
 const DealerwiseReport = ({ selectedDealerName, openPopup, setOpenPopup }) => {
     const[rows,setRows]=React.useState(null)
     const[datas,setData]=React.useState([])
