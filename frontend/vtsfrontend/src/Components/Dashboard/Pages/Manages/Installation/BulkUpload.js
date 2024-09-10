@@ -14,7 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Box } from '@mui/material';
 
 
-const baseUrl= 'https://ims.digitaaz.com'
+const baseUrl= 'https://imsapi.digitaaz.com'
 
 export default function BulkUpload(props) {
   const [open, setOpen] = React.useState(false);
