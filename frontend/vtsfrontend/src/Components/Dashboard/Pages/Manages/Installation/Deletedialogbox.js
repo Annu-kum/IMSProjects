@@ -19,7 +19,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
-const baseUrl='https://ims.digitaaz.com'
+const baseUrl='https://imsapi.digitaaz.com'
 export default function Deletedialogbox(props) {
   const [open, setOpen] = React.useState(false);
   const {setDeleteid,setDeleteDialog,deleteDialog } = props;
