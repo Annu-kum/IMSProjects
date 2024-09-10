@@ -75,7 +75,7 @@ const initialRow = {
 };
 
 
-const baseUrl= 'https://ims.digitaaz.com'
+const baseUrl= 'https://imsapi.digitaaz.com'
 
 
 
