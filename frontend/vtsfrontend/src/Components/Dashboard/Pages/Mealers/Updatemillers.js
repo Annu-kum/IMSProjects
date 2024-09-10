@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
-const baseUrl='https://ims.digitaaz.com'
+const baseUrl='https://imsapi.digitaaz.com'
 export default function Updatemillers(props) {
   const [open, setOpen] = React.useState(false);
   const { setRecordForEdit, openPopup, setOpenPopup ,refreshData} = props;
