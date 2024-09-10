@@ -115,7 +115,7 @@ setOpenDialog(true)
 
 //Get data form dealers table.
 const getData = async ()=>{
-  const response = await axios.get('https://ims.digitaaz.com/dealer/getdealer/',{headers})
+  const response = await axios.get('https://imsapi.digitaaz.com/dealer/getdealer/',{headers})
   setfetchDealers(response.data)
  }
 useEffect(()=>{
@@ -127,7 +127,7 @@ useEffect(()=>{
    event.preventDefault();
 
   
-  axios.post('https://ims.digitaaz.com/dealer/postdealer/',{
+  axios.post('https://imsapi.digitaaz.com/dealer/postdealer/',{
     Dealer_Name:dealername,
     contactno1:contact1,
     contactno2:contact2,
@@ -169,7 +169,7 @@ useEffect(()=>{
 
 //Update table data....
 const handleUpdateClick = (dealerId) => {
-  axios.put(`https://ims.digitaaz.com/dealer/dealerupdate/${dealerId}/`, {
+  axios.put(`https://imsapi.digitaaz.com/dealer/dealerupdate/${dealerId}/`, {
     Dealer_Name: newDealerName,
     contactno1: newcontact1,
     contactno2: newcontact2,
