@@ -23,7 +23,7 @@ export default function BulkUpload(props) {
   const[files,setFiles]=React.useState([])
   const[uploadFile,setuploadFile]=React.useState([])
   const FileInputref = React.useRef(null)
-  const sampleFileUrl = 'http://localhost:3000/images/DeactivationSample.xlsx';
+  const sampleFileUrl = 'https://ims.digitaaz.com/images/DeactivationSample.xlsx';
 
  
     const downloadSampleFile = async (url) => {
