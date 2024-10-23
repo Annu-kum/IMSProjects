@@ -16,24 +16,7 @@ class MillersEntrymodel(models.Model):
     def __str__(self):
         return self.MILLER_NAME
     
-    def save(self, *args, **kwargs):
-        from logmodels.models import MillersEntryLogModel
+    
         
-        # Check if this is a creation or update
-        if self._state.adding:  # True if this is a new instance (creation)
-            action = "Created"
-        else:
-            action = "Updated"
-        
-        # Save the MillersEntrymodel instance
-        super(MillersEntrymodel, self).save(*args, **kwargs)
-        
-        # Log the action
-        MillersEntryLogModel.objects.create(
-            miller_entry=self,
-            action=action,
-            timestamp=timezone.now(),
-            description=f"Miller Entry {action}: {self.MILLER_TRANSPORTER_ID} - {self.MILLER_NAME}"
-        )
 
     

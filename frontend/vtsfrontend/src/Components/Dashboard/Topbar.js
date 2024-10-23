@@ -29,12 +29,12 @@ const Topbar = ({ handleDrawerToggle }) => {
   };
 
 
-  useEffect(()=>{
-       axios.get(`${baseUrl}/manage_users/all/`,{headers})
-       .then((res)=>{
-          setUserData(res.data)
-       })
-  },[])
+  // useEffect(()=>{
+  //      axios.get(`${baseUrl}/manage_users/all/`,{headers})
+  //      .then((res)=>{
+  //         setUserData(res.data)
+  //      })
+  // },[])
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -79,7 +79,7 @@ const Topbar = ({ handleDrawerToggle }) => {
           </IconButton>
         )}
 
-          {userData && userData.results && userData.results.length > 0 && (
+          {/* {userData && userData.results && userData.results.length > 0 && (
               <Typography
                 color={'#1E201E'}
                 fontWeight={'600'}
@@ -88,7 +88,7 @@ const Topbar = ({ handleDrawerToggle }) => {
                 {userData.results[0].username.toUpperCase()}
                 </Typography>
             )
-          }
+          } */}
 
         {auth && (
           <div>

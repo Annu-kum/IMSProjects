@@ -57,6 +57,8 @@ import UploadIcon from '@mui/icons-material/Upload';
 import BulkUpload from './BulkUpload';
 import Deletedialogbox from './Deletedialogbox';
 import {CircularProgress} from '@mui/material';
+
+
 export default function DataGridDemo() {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -69,19 +71,54 @@ export default function DataGridDemo() {
   const [ids,setids]=useState('')
   const [deleteId,setDeleteid]=useState(null)
   const token = localStorage.getItem('Token');
+  
  const headers = {
    'content-type': 'application/json',
    'Authorization': `Token ${token}`,
    'Accept': 'application/json',
  };
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setLoading(true);
+  //     try {
+  //       // Fetch your data here
+  //       const response = await axios.get(`http://127.0.0.1:8000/installation/getinstallerdetai/`,{headers});
+  //       setRows(response.data);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
+  // const findDuplicateGPSIMEI = (rows) => {
+  //   const imeiCount = {};
+  //   rows.forEach((row) => {
+  //     imeiCount[row.GPS_IMEI_NO] = (imeiCount[row.GPS_IMEI_NO] || 0) + 1;
+  //   });
+  //   return imeiCount;
+  // }; 
+
+  // const gpsIMEICount = findDuplicateGPSIMEI(rows);
+
+  // const refresh = ()=>{
+   
+  //     axios.get(`http://127.0.0.1:8000/installation/getinstallerdetai/`,{headers})
+  //       .then((res) => {
+  //         setRows(res.data);
+  //       })
+  // }
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        // Fetch your data here
-        const response = await axios.get(`http://127.0.0.1:8000/installation/getinstallerdetai/`,{headers});
-        setRows(response.data);
+        const response = await axios.get(`http://127.0.0.1:8000/installation/getinstallerdetai/`, { headers });
+        const dataWithImeiFlag = markDuplicateGPSIMEI(response.data);
+        setRows(dataWithImeiFlag);
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -92,15 +129,27 @@ export default function DataGridDemo() {
     fetchData();
   }, []);
 
-    
+  const markDuplicateGPSIMEI = (data) => {
+    const imeiCount = {};
+    // Count occurrences of each IMEI
+    data.forEach(row => {
+      imeiCount[row.GPS_IMEI_NO] = (imeiCount[row.GPS_IMEI_NO] || 0) + 1;
+    });
 
-  const refresh = ()=>{
-   
-      axios.get(`http://127.0.0.1:8000/installation/getinstallerdetai/`,{headers})
-        .then((res) => {
-          setRows(res.data);
-        })
-  }
+    // Mark rows with duplicate IMEI
+    return data.map(row => ({
+      ...row,
+      imeiStatus: imeiCount[row.GPS_IMEI_NO] > 1 ? 'duplicate' : 'unique'
+    }));
+  };
+
+  const refresh = () => {
+    axios.get(`http://127.0.0.1:8000/installation/getinstallerdetai/`, { headers })
+      .then((res) => {
+        const dataWithImeiFlag = markDuplicateGPSIMEI(res.data);
+        setRows(dataWithImeiFlag);
+      })
+  };
 
 
   const openInPopup = id => {
@@ -310,16 +359,29 @@ const [disabled,setdisabled]=useState(true)
         boxShadow:"12px",
         
     }}
-     onClick={()=>{openInPopup(params.row.id)}}
-     
-        >
+     onClick={()=>{openInPopup(params.row.id)}}>
         Update
         </Button>
       ),
     },
     {field:'Entity_id',align:'center', headerAlign:'center', headerName: 'Entity ID', width: 120, editable: true,headerClassName:'head',sx:{fontFamily:'cursive'},},
     { field: 'district',align:'center', headerAlign:'center', headerName: 'District', width: 120, editable: true,headerClassName:'head',sx:{fontFamily:'cursive'},},
-    { field: 'GPS_IMEI_NO',align:'center', headerAlign:'center', headerName: 'GPS IMEI No', width: 100, editable: true,headerClassName:'head' ,},
+    { field: 'GPS_IMEI_NO',align:'center', headerAlign:'center', headerName: 'GPS IMEI No', width: 100, editable: true,headerClassName:'head' ,
+      renderCell: (params) => (
+        <Box
+          sx={{
+            color: params.row.imeiStatus === 'duplicate' ? '#CD1818' : 'inherit',
+            // color: params.row.imeiStatus === 'duplicate' ? 'white' : 'inherit',
+            padding: '5px',
+            borderRadius: '4px',
+          }}
+        >
+          {params.value}
+        </Box>
+      ),
+    },
+
+
     { field: 'SIM_NO',align:'center', headerAlign:'center', headerName: 'SIM NO', width: 100, editable: true,headerClassName:'head' },
     { field: 'Device_Name',align:'center', headerAlign:'center', headerName: 'Device Name', width: 100, editable: true ,headerClassName:'head',},
     { field: 'Dealer_Name',align:'center', headerAlign:'center', headerName: 'Dealer Name', width: 100, editable: true,headerClassName:'head' },
@@ -360,6 +422,9 @@ const [disabled,setdisabled]=useState(true)
     { field: 'Remark3',align:'center', headerAlign:'center', headerName: 'Remark 3', width: 80, editable: true ,headerClassName:'head'},
   ];
 
+ 
+  
+
   const filterRowsBySearch = () => {
     if (!search) {
       return rows;
@@ -381,8 +446,7 @@ const [disabled,setdisabled]=useState(true)
   const filteredRows = filterRowsBySearch();
 
 
-
-
+  
 
 
 
@@ -462,12 +526,15 @@ const [disabled,setdisabled]=useState(true)
                 rowHeight={33}
                 rows={filteredRows}
                 columns={columns}
+                // classes={{'duplicate-imei': classes['duplicate-imei'] }}
                 editMode="column"
                 rowModesModel={rowModesModel}
                 onRowModesModelChange={handleRowModesModelChange}
                 onRowEditStop={handleRowEditStop}
                 processRowUpdate={processRowUpdate}
                 getRowClassName={(params) => params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'}
+               
+                
                 initialState={{
                   ...filteredRows.initialState,
                   pagination: { paginationModel: { pageSize: 25 } },
@@ -482,7 +549,6 @@ const [disabled,setdisabled]=useState(true)
     setids={ids}
     openPopup={openPopup}
     setOpenPopup={setOpenPopup}
-  
   />
   <BulkUpload 
    openDialog={openDialog}

@@ -369,7 +369,10 @@ const dialogbox=()=>{
         (items.MILLER_TRANSPORTER_ID.toLowerCase().includes(search.toLowerCase())) ||
         (items.MILLER_NAME.toLowerCase().includes(search.toLowerCase())) ||
         (items.district.toLowerCase().includes(search.toLowerCase())) ||
-        (items.Dealer_Name.toLowerCase().includes(search.toLowerCase()))
+        (items.Dealer_Name.toLowerCase().includes(search.toLowerCase()))||
+        (items.vehicle1.toLowerCase().includes(search.toLowerCase()))||
+        (items.vehicle2.toLowerCase().includes(search.toLowerCase()))||
+        (items.vehicle3.toLowerCase().includes(search.toLowerCase()))
 
     });
   };
