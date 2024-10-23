@@ -3,6 +3,9 @@ from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
 from Dealer.models import Dealersmodel
 from django.conf import settings
+from logmodels.models import LogModel
+from django.contrib.contenttypes.models import ContentType
+from django.utils import timezone
 # # Create your models here.
 
 # # https://github.com/MoTechStore/Django-4-and-React-JS-18-File-Upload-and-Download/tree/main
@@ -56,6 +59,35 @@ class InstallatonModels(models.Model):
     class Meta:
         verbose_name = "Installation Model"
         verbose_name_plural = "Installation Models"
+    def __str__(self):
+        return self.MILLER_TRANSPORTER_ID
+    
 
+    def save(self, *args, **kwargs):
+        action = "Created" if self._state.adding else "Updated"
+        super(InstallatonModels, self).save(*args, **kwargs)
+        # Log the save action
+        content_type = ContentType.objects.get_for_model(self)
+
+        
+        LogModel.objects.create(
+            content_type=content_type,
+            object_id=self.id,
+            action=action,
+            timestamp=timezone.now(),
+            description=f"Installation {action}: {self.MILLER_TRANSPORTER_ID} - {self.MILLER_NAME}",
+            logged_data={
+                'MILLER_NAME': self.MILLER_NAME,
+                'vehicle1':self.vehicle1,
+                'vehicle1':self.vehicle2,
+                'vehicle1':self.vehicle3,
+                'InstallationDate':self.InstallationDate.strftime('%Y-%m-%d') if self.InstallationDate else None,
+                'Employee_Name':self.Employee_Name,
+                'NewRenewal':self.NewRenewal,
+                'GPS_IMEI_NO':self.GPS_IMEI_NO,
+                'district':self.district,
+                'Installation_letterHead':self.Installation_letterHead.url if self.Installation_letterHead else None,  
+            }
+        )
 
 # https://github.com/MoTechStore/Django-4-and-React-JS-18-File-Upload-and-Download/blob/main/reactjs_django/src/components/UploadFile.js

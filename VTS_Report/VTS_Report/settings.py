@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'MasterReport',
     'import_export',
     'storages',
+    'logmodels',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True  # For development purposes only. Use specific origins in production.
@@ -154,8 +155,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
         'rest_framework.permissions.IsAdminUser',
-        # 'rest_framework.permissions.AllowAny',  # Uncomment this line if you need open access
+         'rest_framework.permissions.AllowAny',  # Uncomment this line if you need open access
     ),
     'DEFAULT_RENDERER_CLASSES':('rest_framework.renderers.JSONRenderer',),
     'DATE_INPUT_FORMATS': ["%d-%m-%Y", "%Y-%m-%d"],
@@ -202,3 +204,35 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 AUTH_USER_MODEL = "account.User"
+
+
+# LOGGING={
+#     'version':1,   
+#     'handlers':{
+#         'file':{
+#             'level':'INFO',
+#             'class': 'logging.FileHandler',
+#             'filename':'./debug5.log',
+#             'formatter':'simpleRe',
+#         },
+#     },
+#     'loggers':{
+#         'django':{
+#             'handlers':['file',],
+#             'level':'DEBUG'
+#         }
+#     },
+#     'formatters':{
+#         'simpleRe': {
+#             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+#             'style': '{',
+#         }
+
+#     }
+# }
+
+
+
+
+
+

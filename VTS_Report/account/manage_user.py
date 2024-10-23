@@ -7,7 +7,7 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework import status,generics,filters
-#from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.models import Token
 from rest_framework.pagination import PageNumberPagination
 from .models import User
 from .serializers import UserSerializer
@@ -38,25 +38,44 @@ class GetUserById(generics.ListAPIView):
         serializer = UserSerializer(result, many=True)
         return Response(serializer.data, status=200)
 class GetTokenUsers(generics.ListAPIView):
-    #authentication_classes = [SessionAuthentication, TokenAuthentication, BasicAuthentication]
-    permission_classes = [AllowAny]
-    def get(self, request):
-        user = User.objects.get(username=request.user.username)
+  authentication_classes = [TokenAuthentication]  # Ensure TokenAuthentication is used
+  permission_classes = [IsAuthenticated]  # Adjust permissions as needed
+
+  def get(self, request):
+        # Get the user from the token
+        user = request.user
+
+        if not user.is_authenticated:  # Check if the user is authenticated
+            return Response({'error': 'User is not authenticated'}, status=401)
+
+        # Initialize an empty queryset
         users = User.objects.none()
+
+        # Check if the user is an admin (assuming isUserAdmin is a valid function)
         if isUserAdmin(user):
             users = User.objects.all()
         else:
-            users = User.objects.filter(createdBy=user)
+            users = User.objects.filter(created_by=user)  # Adjust 'createdBy' to match your field name
+
+        # Handle search filtering
         search_key = request.GET.get('search_key')
         if search_key:
-            users = users.filter(Q(username__icontains=search_key) | Q(first_name__icontains=search_key))
-        else:
-            users = users.all()
+            users = users.filter(
+                Q(username__icontains=search_key) | Q(first_name__icontains=search_key)
+            )
+
+        # Ensure the user is always included in the result
         users |= User.objects.filter(username=user.username)
+
+        # Order by username
         users = users.order_by("username")
+
+        # Implement pagination
         paginator = PageNumberPagination()
         paginator.page_size = PAGE_SIZE
         result_page = paginator.paginate_queryset(users, request)
+
+        # Serialize the paginated data
         serializer = UserSerializer(result_page, many=True)
         return paginator.get_paginated_response(serializer.data)
     

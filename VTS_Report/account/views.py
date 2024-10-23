@@ -52,7 +52,7 @@ class UserLogin(APIView):
         user.last_login = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
         user.save()
         result = UserSerializer(user).data
-        return Response({"msg":"successfully login","Token":token.key},status=HTTP_200_OK)
+        return Response({"result":result,"msg":"successfully login","Token":token.key},status=HTTP_200_OK)
 
 
 class IsUserExists(APIView):

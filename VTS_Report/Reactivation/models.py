@@ -3,6 +3,9 @@ from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
 from Dealer.models import Dealersmodel
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
+from django.utils import timezone
+from logmodels.models import LogModel
 # # Create your models here.
 
 # # https://github.com/MoTechStore/Django-4-and-React-JS-18-File-Upload-and-Download/tree/main
@@ -53,6 +56,34 @@ class ReactivationModels(models.Model):
     class Meta:
         verbose_name = "Reactivation Model"
         verbose_name_plural = "Reactivation Models"
+    
 
+    def save(self, *args, **kwargs):
+        action = "Created" if self._state.adding else "Updated"
+        super(ReactivationModels, self).save(*args, **kwargs)
+        
+        # Log the save action
+        content_type = ContentType.objects.get_for_model(self)
+        LogModel.objects.create(
+            content_type=content_type,
+            object_id=self.id,
+            action=action,
+            timestamp=timezone.now(),
+            description=f"Reactivation {action}: {self.MILLER_TRANSPORTER_ID} - {self.MILLER_NAME}",
+            logged_data={
+                'MILLER_NAME': self.MILLER_NAME,
+                'vehicle1':self.vehicle1,
+                'vehicle1':self.vehicle2,
+                'vehicle1':self.vehicle3,
+                'ReactivationDate':self.ReactivationDate.strftime('%Y-%m-%d') if self.ReactivationDate else None,
+                'Employee_Name':self.Employee_Name,
+                'NewRenewal':self.NewRenewal,
+                'GPS_IMEI_NO':self.GPS_IMEI_NO,
+                'district':self.district,
+                'Reactivation_letterHead':self.Reactivation_letterHead.url if self.Reactivation_letterHead else None,  
+            }
+        )
+
+ 
 
 # https://github.com/MoTechStore/Django-4-and-React-JS-18-File-Upload-and-Download/blob/main/reactjs_django/src/components/UploadFile.js
