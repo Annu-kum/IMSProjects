@@ -22,7 +22,11 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+<<<<<<< HEAD
 const baseUrl='http://127.0.0.1:8000'
+=======
+const baseUrl='https://imsapi.digitaaz.com'
+>>>>>>> ce85400de00445427c7b6bf1ed2c0666062ee80b
 export default function InputTable() {
   const [hide,setHide]=useState(true)
   
@@ -444,6 +448,7 @@ return (
                 <label>Dealer_Name</label>
                 
                 <TextField
+<<<<<<< HEAD
   fullWidth
   variant="filled"
   select
@@ -469,6 +474,28 @@ return (
     </option>
   ))}
 </TextField>
+=======
+                fullWidth
+                variant="filled"
+                select
+                type="text"
+                value={dealerName} 
+                onChange={(e)=>{
+                  const inputs=e.target.value
+                  setDealername(inputs)
+                  handleInputChange(rows[0].id,'Dealer_Name',inputs)}} 
+                sx={{ gridColumn: "span 4" }}
+                SelectProps={{ native: true }}
+                InputProps={{sx:{height:'40px'}}}
+              >
+              <option value=" " >select</option>
+              {  loadDealers.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.Dealer_Name}
+              </option>
+            ))}
+              </TextField>
+>>>>>>> ce85400de00445427c7b6bf1ed2c0666062ee80b
               </Box> 
               </Box>
               </Box>  
@@ -665,28 +692,49 @@ return (
                           onChange={(e) => {
                             const inputs=e.target.value
                             setDeviceimei(inputs)
+<<<<<<< HEAD
                             handleInputChange(row.id, column.id, inputs)}}                       />): column.id === 'Remark1' ? (
+=======
+                            handleInputChange(row.id, column.id, inputs)}}/>)
+                          : column.id === 'Remark1' ? (
+>>>>>>> ce85400de00445427c7b6bf1ed2c0666062ee80b
                         <TextField
                           value={row[column.id]}
                           size="small"
                           onChange={(e) => {
                             const inputs=e.target.value
                             setremark1(inputs)
+<<<<<<< HEAD
                             handleInputChange(row.id, column.id, inputs)}}                       />): column.id === 'Remark2' ? (
+=======
+                            handleInputChange(row.id, column.id, inputs)}}/>)
+                            : column.id === 'Remark2' ? (
+>>>>>>> ce85400de00445427c7b6bf1ed2c0666062ee80b
                         <TextField
                           value={row[column.id]}
                           size="small"
                           onChange={(e) => {
                             const inputs=e.target.value
                             setremark2(inputs)
+<<<<<<< HEAD
                             handleInputChange(row.id, column.id, inputs)}}                       />): column.id === 'Remark3' ? (
+=======
+                            handleInputChange(row.id, column.id, inputs)}}/>)
+                            : column.id === 'Remark3' ? (
+>>>>>>> ce85400de00445427c7b6bf1ed2c0666062ee80b
                         <TextField
                           value={row[column.id]}
                           size="small"
                           onChange={(e) => {
                             const inputs=e.target.value
                             setremark3(inputs)
+<<<<<<< HEAD
                             handleInputChange(row.id, column.id, inputs)}}                       />):<TextField
+=======
+                            handleInputChange(row.id, column.id, inputs)}}/>)
+                            :
+                            <TextField
+>>>>>>> ce85400de00445427c7b6bf1ed2c0666062ee80b
                           value={row[column.id]}
                           size="small"
                          onChange={(e) => handleInputChange(row.id, column.id, e.target.value)}

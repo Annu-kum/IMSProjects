@@ -14,7 +14,7 @@ import DehazeIcon from '@mui/icons-material/Dehaze';
 import {useMediaQuery} from '@mui/material';
 
 
-const baseUrl = 'http://127.0.0.1:8000'
+const baseUrl = 'https://imsapi.digitaaz.com/'
 
 
 const DashboardCard = ({ title, total, newCount, renewal }) => (

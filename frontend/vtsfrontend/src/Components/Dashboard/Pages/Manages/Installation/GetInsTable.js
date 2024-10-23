@@ -116,9 +116,15 @@ export default function DataGridDemo() {
     const fetchData = async () => {
       setLoading(true);
       try {
+<<<<<<< HEAD
         const response = await axios.get(`http://127.0.0.1:8000/installation/getinstallerdetai/`, { headers });
         const dataWithImeiFlag = markDuplicateGPSIMEI(response.data);
         setRows(dataWithImeiFlag);
+=======
+        // Fetch your data here
+        const response = await axios.get(`https://imsapi.digitaaz.com/installation/getinstallerdetai/`,{headers});
+        setRows(response.data);
+>>>>>>> ce85400de00445427c7b6bf1ed2c0666062ee80b
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -136,6 +142,7 @@ export default function DataGridDemo() {
       imeiCount[row.GPS_IMEI_NO] = (imeiCount[row.GPS_IMEI_NO] || 0) + 1;
     });
 
+<<<<<<< HEAD
     // Mark rows with duplicate IMEI
     return data.map(row => ({
       ...row,
@@ -150,6 +157,15 @@ export default function DataGridDemo() {
         setRows(dataWithImeiFlag);
       })
   };
+=======
+  const refresh = ()=>{
+   
+      axios.get(`https://imsapi.digitaaz.com/installation/getinstallerdetai/`,{headers})
+        .then((res) => {
+          setRows(res.data);
+        })
+  }
+>>>>>>> ce85400de00445427c7b6bf1ed2c0666062ee80b
 
 
   const openInPopup = id => {
@@ -224,7 +240,7 @@ const deletePopups = id =>{
 
     try {
       const response = await axios.patch(
-        `http://127.0.0.1:8000/installation/updateinstaller/${newRow.id}/`,
+        `https://imsapi.digitaaz.com/installation/updateinstaller/${newRow.id}/`,
         formData,
         {
           headers: {
@@ -256,7 +272,7 @@ const deletePopups = id =>{
     try {
       const response = await axios({
         method: 'get',
-        url: `http://127.0.0.1:8000/installation/get_file_url/${id}/`,
+        url: `https://imsapi.digitaaz.com/installation/get_file_url/${id}/`,
         responseType: 'arraybuffer',
       });
 

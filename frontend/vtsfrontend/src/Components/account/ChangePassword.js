@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const defaultTheme = createTheme();
-const baseUrl = 'http://127.0.0.1:8000';
+const baseUrl = 'https://imsapi.digitaaz.com';
 
 export default function ChangePassword(props) {
   const navigate = useNavigate();

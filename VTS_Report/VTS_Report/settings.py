@@ -111,8 +111,12 @@ WSGI_APPLICATION = 'VTS_Report.wsgi.application'
 # Database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+         'ENGINE': 'django.db.backends.mysql',  
+        'NAME': 'imsDatabase',  
+        'USER': 'imsuser',  
+        'PASSWORD': 'Annu@122#',  
+        'HOST': '127.0.0.1',  
+        'PORT': '3306',  
     }
 }
 
@@ -204,6 +208,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 AUTH_USER_MODEL = "account.User"
+<<<<<<< HEAD
 
 
 # LOGGING={
@@ -236,3 +241,5 @@ AUTH_USER_MODEL = "account.User"
 
 
 
+=======
+>>>>>>> ce85400de00445427c7b6bf1ed2c0666062ee80b

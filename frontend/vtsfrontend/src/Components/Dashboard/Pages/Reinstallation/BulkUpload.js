@@ -12,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Box } from '@mui/material';
 
 
-const baseUrl= 'http://127.0.0.1:8000'
+const baseUrl= 'https://imsapi.digitaaz.com'
 
 export default function BulkUpload(props) {
   const [open, setOpen] = React.useState(false);
@@ -21,7 +21,7 @@ export default function BulkUpload(props) {
   const[files,setFiles]=React.useState([])
   const[uploadFile,setuploadFile]=React.useState([])
   const FileInputref = React.useRef(null)
-  const sampleFileUrl = 'http://localhost:3000/images/ReactivationSample.xlsx';
+  const sampleFileUrl = 'https://ims.digitaaz.com/images/ReactivationSample.xlsx';
 
  
     const downloadSampleFile = async (url) => {

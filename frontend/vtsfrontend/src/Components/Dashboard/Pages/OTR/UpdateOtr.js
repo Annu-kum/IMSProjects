@@ -14,7 +14,7 @@ import {IconButton} from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { addMonths,format } from 'date-fns';
 import {InputAdornment} from '@mui/material';
-const baseUrl='http://127.0.0.1:8000'
+const baseUrl='https://imsapi.digitaaz.com'
 export default function UpdateOtr(props) {
   const [open, setOpen] = React.useState(false);
   const { setRecordForEdit, openPopup, setOpenPopup ,refreshData} = props;

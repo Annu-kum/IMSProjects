@@ -61,7 +61,7 @@ const columns = [
   { field: 'Remark3',align:'center', label: 'Remark 3', width: 100,},
 ];
 
-const baseUrl='http://127.0.0.1:8000';
+const baseUrl='https://imsapi.digitaaz.com';
 
 export default function InstallReports() {
   const [rows, setRows] = React.useState([]);

@@ -103,7 +103,7 @@ export default function   ReactivationReport() {
       const formattedStartDate = start ? formatDate(start) : undefined;
       const formattedEndDate = end ? formatDate(end) : undefined;
   
-      const response = await axios.get(`http://127.0.0.1:8000/reactivation/getReactivatedetai/`, {
+      const response = await axios.get(`https://imsapi.digitaaz.com/reactivation/getReactivatedetai/`, {
         params: {
           start_date: formattedStartDate,
           end_date: formattedEndDate,
@@ -142,7 +142,7 @@ export default function   ReactivationReport() {
     try {
       const response = await axios({
         method: 'get',
-        url: `http://127.0.0.1:8000/deactivation/get_file_url/${id}/`,
+        url: `https://imsapi.digitaaz.com/deactivation/get_file_url/${id}/`,
         responseType: 'arraybuffer',
       });
 
